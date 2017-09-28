@@ -3,12 +3,17 @@ info:
   title: first-dynamo-api
   description: First Attempt to Use Handel to create a lambda function
   version: '1.0'
+schemes:
+  - https
+#APIGATEWAY Ignores this, so you must put security on each method
+security:
+  - api_key: []
 paths:
   /location:
     post:
       description: Creates a new location
       security:
-        - api_key []
+        - api_key: []
       consumes:
         - application/json
       produces:
@@ -69,4 +74,3 @@ definitions:
       longitude:
         type: string
         description: Location longitude
-

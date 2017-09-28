@@ -13,7 +13,7 @@ def lambda_handler(event, context):
     
     eventBody = json.loads(event['body'])
     
-    if 'device' in evenBody and 'lat' in eventBody and 'lon' in eventBody:
+    if 'device' in eventBody and 'lat' in eventBody and 'lon' in eventBody:
       uid = uuid.uuid4().hex
       
       item = {

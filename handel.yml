@@ -7,7 +7,7 @@ environments:
     webapp:
       type: apigateway
       description: First Test
-      swagger: ./swagger.json
+      swagger: ./swagger.yml
       tags:
         developed: sep22
       dependencies:
