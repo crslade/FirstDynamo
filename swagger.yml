@@ -1,0 +1,72 @@
+swagger: '2.0'
+info:
+  title: first-dynamo-api
+  description: First Attempt to Use Handel to create a lambda function
+  version: '1.0'
+paths:
+  /location:
+    post:
+      description: Creates a new location
+      security:
+        - api_key []
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: device
+          in: body
+          description: Name of Device
+          type: string
+        - name: lat
+          in: body
+          description: latitude
+          type: string
+        - name: lon
+          in: body
+          description: Longitude
+          type: string
+      responses:
+        200:
+          description: Inserted Location
+          schema:
+            $ref: '#/definitions/Location'
+        400:
+          description: Error
+          schema:
+            $ref: '#/definitions/Error'
+      x-lambda-function: insert-point
+x-lambda-functions:
+  insert-point:
+    runtime: python3.6
+    handler: insert_point.lambda_handler
+    memory: '128'
+    path_to_code: .
+
+securityDefinitions:
+  api_key:
+    type: apiKey
+    name: x-api-key
+    in: header
+
+definitions:
+  Error:
+    description: Error Message
+    properties:
+      errorMessage:
+        type: string
+        description: Description of the error message.
+  Location:
+    description: A location event
+    type: object
+    properties:
+      device:
+        type: string
+        description: Device that sent the location
+      latitude:
+        type: string
+        description: Location latitude
+      longitude:
+        type: string
+        description: Location longitude
+

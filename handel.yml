@@ -1,0 +1,22 @@
+version: 1
+
+name: first-dynamo
+
+environments:
+  dev:
+    webapp:
+      type: apigateway
+      description: First Test
+      swagger: ./swagger.json
+      tags:
+        developed: sep22
+      dependencies:
+        - table
+    table:
+      type: dynamodb
+      partition_key:
+        name: uuid
+        type: String
+      provisioned_throughput:
+        read_capacity_units: 2
+        write_capacity_units: 2
